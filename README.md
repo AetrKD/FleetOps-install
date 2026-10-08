@@ -1,0 +1,35 @@
+# FleetOps 설치
+
+Ubuntu·Debian·Fedora 서버를 관리하는 FleetOps의 공개 설치 저장소입니다. 운영체제별로 저장소를 나누지 않습니다. 설치 프로그램이 배포판과 CPU를 확인하고 맞는 실행 파일을 내려받습니다.
+
+## 설치하기
+
+서버 터미널에서 다음을 실행합니다. USB, Git, Node.js 사전 설치는 필요 없습니다.
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/AetrKD/FleetOps-install/main/install.sh -o install-fleetops.sh && sh install-fleetops.sh
+```
+
+SHA-256과 고정된 공개 키의 서명을 확인한 후 설치합니다. Linux 시스템 설치에 필요한 관리자 비밀번호는 설치 도구가 요청합니다. 기존 설치를 갱신하면 비밀번호·서버 등록 정보·설정·작업 기록을 유지합니다.
+
+설치 후 같은 네트워크에서 `http://서버IP:3621/`에 접속합니다. 초기 비밀번호는 `admin`이며 대시보드에서 변경할 수 있습니다. 초기 비밀번호를 사용하면 변경 알림을 표시합니다. 호스트 systemd 시스템 설치는 서버 부팅 시 자동 시작합니다.
+
+버전 고정이나 설치 옵션도 사용할 수 있습니다.
+
+```sh
+sh install-fleetops.sh --version v0.1.3
+sh install-fleetops.sh --port 3631
+```
+
+## 배포 파일
+
+[Releases](https://github.com/AetrKD/FleetOps-install/releases)에서 버전별 설치 파일, 대시보드 업데이트 묶음, 체크섬과 서명을 제공합니다. `.run`은 새 설치/재설치용, `.tar.gz`는 대시보드의 설치·버전 화면에서 적용하는 용도입니다. 같은 CPU의 Ubuntu·Debian·Fedora는 같은 Linux 설치 파일을 사용합니다.
+
+이 저장소에는 설치 진입점과 실행용 배포 파일을 제공합니다. 원본 개발 저장소와 Git 이력, 서버 DB, 비밀번호, SSH 접속 키와 배포 서명 개인 키는 포함하지 않습니다. 배포 파일의 실행 코드는 내려받은 사람이 분석할 수 있으므로 코드 비밀성을 보장하는 방식은 아닙니다.
+
+## 설치 조건과 지원 범위
+
+- Ubuntu·Debian·Fedora의 일반 Linux 환경. Fedora Atomic 등 변경 불가능한 시스템은 제외합니다.
+- CPU에 맞는 Release 파일이 있어야 합니다. 게시되지 않은 CPU의 파일을 다른 CPU용으로 대신 설치하지 않습니다.
+- 인터넷 연결과 `curl`, `tar`, `sha256sum`, `openssl`이 필요합니다. 방화벽·VPN·HTTPS 프록시 설정은 네트워크 환경에 따라 별도로 필요할 수 있습니다.
+- 호스트 systemd와 계정 관리 도구가 있는 서버는 관리자 인증 후 시스템 설치합니다. 컨테이너 등에서는 지원 가능한 사용자 설치 기능을 표시합니다.
